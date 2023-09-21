@@ -7,3 +7,5 @@ a = int(2)
 b = int(3)
 
 print(addition(a,b))
+
+#resource: https://www.thecrazyprogrammer.com/2017/04/python-program-add-two-numbers.html#google_vignette
