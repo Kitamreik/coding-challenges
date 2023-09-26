@@ -47,3 +47,43 @@ function canNest(arr1, arr2) {
 //canNest([1, 2, 3, 4], [0, 6]) //➞ true
 //canNest([9, 9, 8], [8, 9]) //➞ false, Note the strict inequality.
 //canNest([1, 2, 3, 4], [2, 3]) //➞ false
+// ------
+//9-26
+
+//Write a function that returns the string "something" 
+//joined with a space " " and the given argument a.
+function giveMeSomething(a) {
+	if (a) {
+		let sentence = "something"
+		let arg = "a"
+		let result = sentence.concat(" ", arg)
+		return result
+	}
+	let sentence2 = "something"
+	let arg2 = "is cooking"
+	let result2 = sentence2.concat(" ", arg2)
+	return result2
+}
+
+giveMeSomething()
+// ^ will work
+
+function giveMeSomething(a) {
+		let sentence = "something"
+		let arg = "a" //Test Passed: Value == 'something a'
+		let arg2 = "is cooking" //Test Passed: Value == 'something is cooking'
+		let result = sentence.concat(" ", arg)
+		let result2 = sentence.concat(" ", arg2)
+		return {result, result2}
+}
+
+giveMeSomething()
+//^will work, returns answers in object
+
+//the answer:
+function giveMeSomething(a) {
+	return `something ${a}`
+}
+
+giveMeSomething()
+giveMeSomething("is cooking")
