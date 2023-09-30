@@ -124,3 +124,46 @@ prom.then((res) => {
 
 Test.assertEquals(promise, promise)
 
+// Recursion: https://developer.mozilla.org/en-US/docs/Glossary/Recursion
+// x=n(n+1)(2n+1)/6 --> https://math.fandom.com/wiki/Square_pyramidal_number
+// exponentiation: https://levelup.gitconnected.com/exponentiation-operator-in-javascript-e38e8255062c
+
+//Create a function that calculates the number of different squares 
+//in an n * n square grid. - nfinity
+function numberSquares(n) {
+
+//const fibonacci = (n) => (n <= 2 ? 1 : fibonacci(n - 1) + fibonacci(n - 2));
+if (n == 0) {
+	return 0
+}	else if (n == 1) {
+	return 1
+} else {
+	console.log(n)
+	let nfinity = numberSquares(n-1)
+	nfinity += n*n
+	return nfinity
+	// 3^2 + 5 = 9 + 5 = 14
+	// n <= 2 ? 1 : n * (nfinity(n+1) * nfinity(2*n+1))/6 --> 	//x=n(n+1)(2n+1)/6
+	
+	//console.log("Maximum call stack size exceeded")
+	//return error
+}
+}
+
+numberSquares(3)
+
+
+//keep
+/*
+If n = 0 then the number of squares is 0
+If n = 1 then the number of squares is 1 + 0 = 1
+If n = 2 then the number of squares is 2^2 + 1 = 4 + 1 = 5
+If n = 3 then the number of squares is 3^2 + 5 = 9 + 5 = 14
+
+As you can see, for each value of n the number of squares is 
+n squared + the number of squares from the previous value of n.
+
+Input is a positive integer.
+Square pyramidal number.
+
+*/
