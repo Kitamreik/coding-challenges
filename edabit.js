@@ -87,3 +87,40 @@ function giveMeSomething(a) {
 
 giveMeSomething()
 giveMeSomething("is cooking")
+// 9-30
+
+//Area of a Triangle
+function triArea(base, height) {
+	//The area of a triangle is: (base * height) / 2
+	const area = (base * height) / 2
+	return area 
+}
+
+triArea(3,2)
+triArea(7, 4)
+triArea(10, 10)
+
+//----
+//Promises: objects that contain the outcome of asynchronous operations.
+//promise constructor: control the outcome of an asynchronous operation
+let promise = new Promise( (resolve, reject) => {
+	//executor: two parameters, resolve and reject.
+  setTimeout(( ) => {
+		//setTimeout is a browser API 
+		//that is very commonly used in tutorials to represent async operations.
+     resolve("Hello there, programmer!")
+  }, 1000) //1000ms
+})
+
+//Test:
+let prom = promise.then((err, res) => {
+	if(err) { return err } 
+	return res
+})
+
+prom.then((res) => {
+	Test.assertEquals(typeof res, "string", "The promise needs resolve a string." )	
+}) 
+
+Test.assertEquals(promise, promise)
+
