@@ -167,3 +167,31 @@ Input is a positive integer.
 Square pyramidal number.
 
 */
+
+//Convenience Store
+/*
+Given a total due and an array representing the amount of change in your
+pocket, determine whether or not you are able to pay for the item. 
+Change will always be represented in the following order: quarters, dimes, nickels, pennies.
+QDNP
+*/
+function changeEnough(change, amountDue) {
+	const [quarters, dimes, nickels, pennies] = change;
+	return amountDue <= quarters * 0.25 + dimes * 0.10 +  nickels * 0.05 + pennies* 0.01
+	/*
+	let sum = quarters + dimes + nickels + pennies
+	console.log(sum)
+	console.log(`The change you have is ${quarters} ${dimes} ${nickels} ${pennies}. The amount due is ${amountDue}`);
+	if (sum <= amountDue) {
+		return false //works
+	} else {
+		return true
+	}
+	*/
+		
+	//EX. changeEnough([25, 20, 5, 0], 4.25) --> true
+	//25 quarters, 20 dimes, 5 nickels and 0 pennies gives you 
+	//6.25 + 2 + .25 + 0 = 8.50.
+	//BUT changeEnough([2, 100, 0, 0], 14.11) ➞ false
+	
+}
