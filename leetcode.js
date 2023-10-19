@@ -110,11 +110,49 @@ var search = function(nums, target) {
  * @param {function} isBadVersion()
  * @return {function}
  */
+
+/-----THE FINAL RESULT-----
+/**
+ * Definition for isBadVersion()
+ * 
+ * @param {integer} version number
+ * @return {boolean} whether the version is bad
+ * isBadVersion = function(version) {
+ *     ...
+ * };
+ */
+
+/**
+ * @param {function} isBadVersion()
+ * @return {function}
+ */
 var solution = function(isBadVersion) {
     /**
      * @param {integer} n Total versions
      * @return {integer} The first bad version
      */
+    return function(n) {
+        let low = 0; //init
+        let hi = n //bad= input so consider as a limit
+        while (hi-low > 1) { //bad-lowest point should be more than 1, the lowest point is 1
+            let mid = Math.floor((low +hi)/2); //remove +1 and add them together
+
+        //refactor: use the function isBadVersion() and have the mid as the parameter to hone in
+            const result = isBadVersion(mid) //use as condition
+            if (result) { //keep it to 1 API call
+                hi = mid 
+            } else {
+                low = mid 
+            }
+        }
+        return hi //end iteration --> point to the solution
+    };
+};
+
+//Psuedocode
+/**
+----2ND TRY-----
+var solution = function(isBadVersion) {
     return function(n) {
         let low = 1; //the lowest point is 1
         let hi = n //bad= input so consider as a limit
@@ -133,23 +171,9 @@ var solution = function(isBadVersion) {
     };
 };
 
-//Psuedocode
-/**
- * Definition for isBadVersion()
- * 
- * @param {integer} version number
- * @return {boolean} whether the version is bad
- * isBadVersion = function(version) {
- *     ...
- * };
- */
 
-/**
- * @param {function} isBadVersion()
- * @return {function}
- */
 
-/*
+-----1ST TRY-----
 var solution = function(isBadVersion) {
      //* @param {integer} n Total versions
      //* @return {integer} The first bad version
