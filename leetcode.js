@@ -94,3 +94,77 @@ var search = function(nums, target) {
     return -1 //works for one test case, 2 does not exist in nums so return -1
 };
 */
+//-----
+//https://leetcode.com/problems/first-bad-version/
+/**
+ * Definition for isBadVersion()
+ * 
+ * @param {integer} version number
+ * @return {boolean} whether the version is bad
+ * isBadVersion = function(version) {
+ *     ...
+ * };
+ */
+
+/**
+ * @param {function} isBadVersion()
+ * @return {function}
+ */
+var solution = function(isBadVersion) {
+    /**
+     * @param {integer} n Total versions
+     * @return {integer} The first bad version
+     */
+    return function(n) {
+        let low = 1; //the lowest point is 1
+        let hi = n //bad= input so consider as a limit
+        while (low <= hi) { //added =
+            let mid = low + Math.floor((low +hi)/2); //remove +1 and add them together
+
+        //refactor: use the function isBadVersion() and have the mid as the parameter to hone in
+            const result = isBadVersion(mid) //use as condition
+            if (result) {
+                hi = mid - 1 //-1 is correct, so go to the left and discard the high
+            } else {
+                low = mid + 1  //add +1 to still discard low
+            }
+        }
+        return low //end iteration --> point to the solution
+    };
+};
+
+//Psuedocode
+/**
+ * Definition for isBadVersion()
+ * 
+ * @param {integer} version number
+ * @return {boolean} whether the version is bad
+ * isBadVersion = function(version) {
+ *     ...
+ * };
+ */
+
+/**
+ * @param {function} isBadVersion()
+ * @return {function}
+ */
+
+/*
+var solution = function(isBadVersion) {
+     //* @param {integer} n Total versions
+     //* @return {integer} The first bad version
+    return function(n) {
+        let low = 0;
+        let hi = n.length-1
+        while (low < hi) {
+            let mid = low + Math.floor((hi-low)/2); //remove +1 
+            if (n < n[mid]) {
+                hi = mid +1 //change from -1 to +1, change hi to low
+            } else {
+                low = mid //change low to hi
+            }
+        }
+        return n[low] == n ? low : +1 //changed from -1 to +1 passes a test case
+    };
+};
+*/
