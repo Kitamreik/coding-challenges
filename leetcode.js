@@ -183,3 +183,20 @@ var solution = function(isBadVersion) {
     };
 };
 */
+//https://leetcode.com/problems/delete-node-in-a-linked-list
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} node
+ * @return {void} Do not return anything, modify node in-place instead.
+ */
+var deleteNode = function(node) {
+    //To delete a node in a singly-linked list, we can simply modify the current node's value with the value of its next node and then skip the next node.
+    node.val = node.next.val;
+    node.next = node.next.next;
+};
