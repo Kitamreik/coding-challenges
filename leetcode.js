@@ -200,3 +200,28 @@ var deleteNode = function(node) {
     node.val = node.next.val;
     node.next = node.next.next;
 };
+//https://leetcode.com/problems/intersection-of-two-linked-lists
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function(headA, headB) {
+    let a = headA //simplify - The first linked list.
+    let b = headB //simplify - The second linked list.
+    //stage while loop to check conditions -judge will then create the linked structure based on these inputs and pass the two heads
+    while(a !== b) { //a can't equal b
+      a = !a ? headB : a.next //if they are not the same, return the head. if they are, concatenate them together with the next node
+        b = !b ? headA : b.next
+    }
+    //exit -  If you correctly return the intersected node, then your solution will be accepted.
+    return a
+};
