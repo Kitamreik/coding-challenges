@@ -294,3 +294,57 @@ var mergeAlternately = function(word1, word2) {
 
 console.log(mergeAlternately("abc","pqr"))
 
+//https://leetcode.com/problems/greatest-common-divisor-of-strings/description/?envType=study-plan-v2&envId=leetcode-75
+/**
+ * @param {string} str1
+ * @param {string} str2
+ * @return {string}
+ */
+var gcdOfStrings = function(str1, str2) {
+  //split the string then search the string for a match to act as a condition
+    console.log(str2.split(str1)) //ABAB
+    console.log(str1.includes(str2)) //true
+
+    //these have not changed
+    //console.log(str1) //ABABAB
+    //console.log(str2) //ABAB
+
+
+    let result = str2.split(str1).toString()
+    let condition = str1.includes(str2)
+    let alt = result.includes(str2) //true
+     let divide = str2.substring(0,2)
+
+//Note: this can be refactored
+    if (condition === true && alt != true) {
+        //otherwise the first case works
+        console.log(result) 
+        //return result
+    } else if (condition && alt) { //the condition does trigger the result if it can be divided once
+    //catch a second case early, divide it multiple times
+        console.log(divide) 
+        //return divide
+        //code works
+    } else if (condition !== alt) {
+        //if there is not a match, print empty string 
+        console.log("Empty case for now...")
+        let empty = ""
+        console.log(empty)
+        return empty
+
+        //code works
+    } else {
+    console.log("Error...")
+    }
+};
+//console.log(gcdOfStrings("ABCABC","ABC"))
+/* 
+ console.log(str2.split(str1)) //['ABC']
+    console.log(str1.includes(str2)) //true
+
+    //these have not changed
+    console.log(str1) //ABCABC
+    console.log(str2) //ABC
+*/
+//console.log(gcdOfStrings("ABABAB","ABAB")) //2ND CASE
+console.log(gcdOfStrings("LEET","CODE")) //3RD CASE
