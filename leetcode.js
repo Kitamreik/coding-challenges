@@ -225,3 +225,72 @@ var getIntersectionNode = function(headA, headB) {
     //exit -  If you correctly return the intersected node, then your solution will be accepted.
     return a
 };
+
+//2-21
+//https://leetcode.com/problems/merge-strings-alternately/?envType=study-plan-v2&envId=leetcode-75
+/**
+ * @param {string} word1
+ * @param {string} word2
+ * @return {string}
+ */
+var mergeAlternately = function(word1, word2) {
+    
+    
+    //intermediate logic that allows for the strings to be combined by the spaces
+
+    //create two pointers
+    let foo = 0;
+    let bar = 0;
+    let str = ""
+    //let's try reduce variables, if not use word
+    while(foo < word1.length && bar < word2.length){ // we want to run the while loop while we can compare the length of the words
+    str += (str.length % 2 == 0) ? word1[foo++] : word2[bar++]//have the string converted to the result of the ternary operator, which says if there's no more characters, add 1 to the foor/bar count which will add a character to the empty string
+    //console.log(word1[foo++]) //bp
+    //console.log(word2[bar++]) //cr
+    //bpcr 
+  
+    }
+
+    //compare individually
+    while(foo < word1.length){ //iterate through length
+        str += word1[foo++] //add to the empty string by index
+    }
+    while(bar < word2.length){
+         str += word2[bar++]
+    }
+
+    console.log(str)
+    return str;
+    
+    /*
+    let reduceA = word1.split("") //split the first word by the spaces
+    console.log(reduceA) //[ 'a', 'b', 'c' ]
+    let reduceB = word2.split("") //split the second word by the spaces
+    console.log(reduceB) //[ 'p', 'q', 'r' ]
+
+     for (let i = 0; i < reduceA.length; i++) {
+    //console.log(reduceA += reduceA[i] + " ")
+    console.log(reduceA[i] + " ")
+        //insert for loop again...
+        for (let i = 0; i < reduceB.length; i++) {
+        //console.log(reduceA += reduceA[i] + " ")
+        console.log(reduceB[i] + " ")
+        
+        }
+    }
+    //gave me: a p q r b p
+    //expected: a p b q c r
+
+       //-------------
+    //concat them
+    //let combo = reduceA.concat(reduceB)
+    //console.log(combo) //[ 'a', 'b', 'c', 'p', 'q', 'r' ]
+    
+    //let combine = combo.join("").toString()
+    //console.log(combine) //abcpqr
+   // expected answer for test 1: "apbqcr"
+    */
+};
+
+console.log(mergeAlternately("abc","pqr"))
+
