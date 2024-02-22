@@ -346,5 +346,55 @@ var gcdOfStrings = function(str1, str2) {
     console.log(str1) //ABCABC
     console.log(str2) //ABC
 */
+
+
+//https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/?envType=study-plan-v2&envId=leetcode-75
+/**
+ * @param {number[]} candies
+ * @param {number} extraCandies
+ * @return {boolean[]}
+ */
+var kidsWithCandies = function(candies, extraCandies) {
+    let bar = [2,3,5,1,3];//array
+    //let extraBar = 3;
+    bar.splice(0, 5, true, true, true, false, true)
+    //console.log(bar) //works
+    let chocolate = [4,2,1,1,2];
+    //let extraChoc = 1;
+    chocolate.splice(0, 5, true, false, false, false, false)
+    //console.log(chocolate) //works
+    let caramel = [12, 1, 12]
+    //let extraCar = 10;
+    caramel.splice(0,3, true, false, true)
+    console.log(caramel)
+
+    /* 
+    Exceeded time limit...
+     bar = kidsWithCandies([ true, true, true, false, true ])
+    chocolate = kidsWithCandies([ true, false, false, false, false ])
+    */
+   
+    //console.log(bar, chocolate, caramel) //both cases are correct
+
+    
+    return(caramel) 
+    //------ unreachable -------
+    /* 
+    for (i = 0; i < bar.length; i++) {
+    //let combo = bar[i] + extraBar
+    //console.log(combo) //56846
+    let correct = true
+    let wrong = false
+    if (combo > 4) {
+        console.log(correct)
+        //return true
+    } else {
+        console.log(wrong)
+        //return false
+    }
+    }
+    */
+};
+
 //console.log(gcdOfStrings("ABABAB","ABAB")) //2ND CASE
 console.log(gcdOfStrings("LEET","CODE")) //3RD CASE
