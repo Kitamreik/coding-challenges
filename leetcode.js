@@ -453,8 +453,31 @@ console.log(res)
 
 //Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Right_shift
 //-------
-//
+//https://leetcode.com/problems/guess-number-higher-or-lower/?envType=study-plan-v2&envId=leetcode-75
+var guessNumber = function(n) {
+    //init 2 pointers
+    let start = 1; //start should be 1 not zero (re: count)
+    let end = n;
 
+    //otherwise - repeat the guess
+    //compare using while loop 
+    while (start <= end ) { //it should stop when it matches
+        let middle = Math.floor((start + end)/2);
+        let guessedNumber = guess(middle); //call the API
+        //--API call
+             //catch correct answer early
+             if (guessedNumber == 0) {
+                 return middle; //otherwise, return 0
+            } else if (guessedNumber == 1) {
+                start = middle + 1;   //1: Your guess is lower than the number I picked
+                console.log(`Your guess is higher than the number I picked`);
+            } else if (guessedNumber == -1) {
+                end = middle - 1;  //-1: Your guess is higher than the number I picked
+                console.log(`Your guess is lower than the number I picked`);
+            }
+        //end 
+    }
+};
 /*
 var guessNumber = function(n) {
     //let pick = Number(prompt("guess a number")) //works if equal, flips the order of the right outcome
