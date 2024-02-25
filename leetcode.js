@@ -452,3 +452,51 @@ const res = countBits(bar);
 console.log(res)
 
 //Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Right_shift
+//-------
+//
+
+/*
+var guessNumber = function(n) {
+    //let pick = Number(prompt("guess a number")) //works if equal, flips the order of the right outcome
+    let pick;
+    //catch correct answer early
+    if (n == pick) {
+        console.log("test worked")
+        console.log(n)
+    }
+
+    
+    //otherwise - repeat the guess
+    let count = 0;
+    //compare using while loop - if the num does NOT equal pick
+    //while (n !== pick) {
+        if (n < pick) {
+            do {
+            //1: Your guess is lower than the number I picked
+            console.log(`Your guess is lower than the number I picked`)
+            console.log(n)
+            count++;
+            
+            return pick;
+        }
+        while (n < pick);
+        } else if (n > pick) {
+            do {
+                 //-1: Your guess is higher than the number I picked
+                console.log(`Your guess is higher than the number I picked`)
+                console.log(n)
+                count++;
+                
+                return pick;
+            } 
+            while (n > pick);
+        }
+    //}
+    //does work if (n == pick)
+     console.log(`you win: your guess ${pick}, is equal to the number I picked`)
+     console.log(n)
+    return pick;
+    //does work
+};
+guessNumber(10)
+*/
