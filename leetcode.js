@@ -420,3 +420,35 @@ var kidsWithCandies = function (candies, extraCandies) {
     }
     */
 };
+
+//2-24
+//https://leetcode.com/problems/counting-bits/?envType=study-plan-v2&envId=leetcode-75
+var countBits = function(num) {
+    const arr = []; //array to store new bits
+    function whileLoop(num) { //use the number as a parameter
+        let counter = 0; //init a counter
+        while(num > 0) { 
+            //add to the count and the least significant bit
+            counter += num & 1;
+            num >>= 1; //shift to the right to check the next one 
+        }
+        //return the count
+        return counter;
+    }
+     //use a for loop to iterate by the index so I can push the entries in the array one by one with the number as a parameter
+     for (let i = 0; i <= num; i++) {
+         arr.push(whileLoop(i));
+     }
+    //return the array
+    return arr;
+};
+//Test cases
+const foo = 2;
+const ans = countBits(foo);
+console.log(ans)
+
+const bar = 5;
+const res = countBits(bar);
+console.log(res)
+
+//Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Right_shift
