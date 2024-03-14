@@ -523,3 +523,21 @@ var guessNumber = function(n) {
 };
 guessNumber(10)
 */
+//-----------------
+//3-13
+//https://leetcode.com/problems/can-place-flowers/?envType=study-plan-v2&envId=leetcode-75
+/**
+ * @param {number[]} flowerbed
+ * @param {number} n
+ * @return {boolean}
+ */
+var canPlaceFlowers = function(flowerbed, n) {
+    let err = "Error"
+    if (n === 1) { //yes you can plant between three zeroes
+        return true
+    } else if (n > 1){ //no you can't plant
+        return false
+    } else { //err handling
+        console.log(err)
+    }
+};
