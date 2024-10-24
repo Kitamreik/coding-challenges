@@ -565,7 +565,7 @@ var canPlaceFlowers = function(flowerbed, n) {
     }
 };
 //------
-https://leetcode.com/problems/count-odd-numbers-in-an-interval-range/
+//https://leetcode.com/problems/count-odd-numbers-in-an-interval-range/
 /**
  * @param {number} low
  * @param {number} high
@@ -585,3 +585,59 @@ var countOdds = function(low, high) {
 
 countOdds(3, 7)
 // countOdds(8, 10)
+
+//--------
+//10-23:
+/**
+ * @param {number[]} cost
+ * @return {number}
+ */
+var minCostClimbingStairs = function(cost) {
+    //Build an array dp where dp[i] is the minimum cost to climb to the top starting from the ith staircase.
+    let dp = cost //make soft copy
+    console.log(dp)
+
+    // Class base case: 
+    if (dp.length <= 1 || dp.length >= 1001) {
+        console.log("outside of range")
+    }
+
+    //Learn: initialize counters for steps
+    let a = 0, b = 0, c = 0  
+
+    //Assuming we have n staircase labeled from 0 to n - 1 and assuming the top is n, then dp[n] = 0, marking that if you are at the top, the cost is 0.
+
+    //Now, looping from n - 1 to 0, the dp[i] = cost[i] + min(dp[i + 1], dp[i + 2]). The answer will be the minimum of dp[0] and dp[1]
+
+    //Learn: the index has to be init at 2 to start 
+    for (let i = 2; i <= dp.length; i++) { //for loops logic correct, make sure that the equal sign is present to stop
+    
+    //First, init the oneStep or twoStep counters with the tracker and then the array copy's end
+    const oneStep = b + dp[i - 1]
+    const twoStep = c + dp[i - 2]
+
+        //TEST: console.log(dp[i], "before value transfer")
+        //minimum is not defined -->  dp[i] = cost[i] + min(dp[i + 1], dp[i + 2]) //VALUE TRANSFER
+        //closer to the answer --> dp[i] = cost[i] + Math.min(dp[i + 1], dp[i + 2]) //VALUE TRANSFER
+
+        //Learn: consolidate value transfer via the original count, a, with the Math.min equation
+        a = Math.min(oneStep, twoStep)
+        console.log(a, "the copy of the array")
+
+
+        //Tracking the soft copy's index and storing the result, of the minimum cost of the dp array based on where it ends
+        //Learn: transfer between the counters and then the array
+        c = b;
+        console.log(c, "C")
+        b = a;
+        console.log(b, "B")
+
+        //TEST: console.log(dp[i], "after value transfer")
+    }
+
+
+    //exit and return
+    console.log("value returned outside of the loop is B")
+    return b;
+    //Psuedocode: return dp[i]
+};
