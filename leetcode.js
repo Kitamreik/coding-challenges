@@ -641,3 +641,129 @@ var minCostClimbingStairs = function(cost) {
     return b;
     //Psuedocode: return dp[i]
 };
+//-------
+// https://leetcode.com/problems/missing-number/
+//Final
+
+var missingNumber = function (nums) {
+    const map = new Map();
+
+    // Populate the map with each number in nums
+    for (let num of nums) {
+        map.set(num, true);
+    }
+
+    // Check each number from 0 to n to see if it's in the map
+    for (let i = 0; i <= nums.length; i++) {
+        if (!map.has(i)) {
+            return i;  // Return the missing number
+        }
+    }
+};
+
+//Cleaned code - 111/122 cases
+var missingNumber = function (nums) {
+    const map = new Map();
+    //let str = "key"
+    //map.set(str, nums)
+
+    for (let num of nums) {
+        map.set(num, true); //set each number and then state it's true
+    }
+
+
+    //find the length -1
+    let diff = nums.length - 1
+
+    //let the total length be stored by itself via the constraint
+    let n = nums.length
+
+    //check for smaller cases
+    let condition = diff == map.size
+    let res = diff + 1
+    let rep = diff - 1
+    let out = 0
+
+    for (let [str, nums] of map) {
+        //console.log(str, nums)
+        console.log(n, "length of nums")
+
+        for (let i = 0; i < n; i++) {
+            if (nums[i] != diff) { //logic works
+                console.log("the missing number is not in the extended range, so find the difference", diff)
+                //console.log("map size", map.size)
+                if (n == 2) { //diff == map.size OR Learn: if (nums[diff] !== n) return n;
+                    console.log(condition, ": condition check- the diff and map size are the same, so adjust. if this statement is false, return the result between n and diff")
+                    console.log("the missing number is not in the difference range, so find the length of the nums", n)
+                    if ( condition == false && !map.has(diff) ) {
+                        return diff
+                    } else if (condition == false && !map.has(diff) && out) {
+                        return 0
+                    } else {
+                        return n
+                    }
+                    
+                } else if (!map.has(i)) { // Populate the map with each number in nums if not within the range //use the has method to see if the alt map doesn't have the specified index
+                    return i;  // Return the missing number
+                } else if (diff === 0) {
+                    return 1;
+                }
+            } else {
+                return diff
+            }
+        }
+    }
+
+}
+
+
+// 1st try
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var missingNumber = function (nums) {
+    const map = new Map();
+    let str = "key"
+    map.set(str, nums)
+
+    //find the length + 1/-1
+    //let extension = nums.length + 1 //not needed
+    let diff = nums.length - 1
+
+    //let the total length be stored by itself via the constraint
+    let n = nums.length
+
+    for (let [str, nums] of map) {
+        console.log(str, nums)
+        console.log(n, "length of nums")
+
+        for (let i = 0; i < map.size; i++) {
+            if (nums[i] != diff) { //logic works
+                console.log("the missing number is not in the extended range, so find the difference", diff)
+                console.log("map size", map.size)
+                if (n == 2) { //diff == map.size
+                    console.log(diff == map.size, ": the diff and map size are the same, so adjust")
+                    console.log("the missing number is not in the difference range, so find the length of the nums", n)
+                    return n
+                } else {
+                    return diff
+                    //console.log("if statement error")
+                }
+            } else {
+                //console.log("logic error, please review")
+                console.log("considering other cases...")
+               
+
+            }
+        }
+        //exit logic
+    }
+    //exit and return
+
+
+};
+
+//before I start coding: it seems that the end is the total numbers + 1 to signal out of bounds
+
+//i can use a map to create key/values to track the numbers
