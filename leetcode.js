@@ -767,3 +767,41 @@ var missingNumber = function (nums) {
 //before I start coding: it seems that the end is the total numbers + 1 to signal out of bounds
 
 //i can use a map to create key/values to track the numbers
+
+//10-29
+//https://leetcode.com/problems/length-of-last-word
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLastWord = function(s) { //input: s, a string
+    console.log("what's happening with dat string, yo", s) //tracking values before we even do any logic
+
+    //counter: end the string, number of characters in the last word
+    let char = 0;
+    let space = 0;
+
+    //create a loop and use those counters --> loops are condition checkers --> for loop: we know when it's going to stop --> in an array the end is always array.length - 1
+    for (let i = s.length-1; i >= 0; i--) { //our index starts at the end of the array, where the index has to be zero or greater and we decrement because we are traversing backwards!!!!
+        //base case: see if the string is empty
+        if (s[i]===" ") {
+            space++; //count up if there's a space
+        } else if (i === 0 || i > 10000) { //edge case: based off constraints
+            console.log("out of bounds")
+            console.log("try to increment char to go up")
+            //space++;
+            char++;
+        } else { //heavy logic
+            char++; //count up if there's a char
+        } 
+        //check...
+        if (s[i] === " " && char > 0 && space > 0) {
+            //magic keyword
+            console.log("check complete, review...")
+            break; 
+        }
+    }
+    //output - return an integer of the length of the last word
+    return char;
+    
+};
