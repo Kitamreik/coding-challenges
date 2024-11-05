@@ -894,3 +894,27 @@ var removeElement = function(nums, val) {
     //return and exit loop - return the k pointer where it is the length of the modded array
     return k;
     };
+
+//-----
+//https://leetcode.com/problems/remove-duplicates-from-sorted-array/?envType=study-plan-v2&envId=top-interview-150
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    let pointer = 1; //Learn: init the pointer to one so it can find a unique element in the array
+
+    for (let i = 1; i < nums.length; i++) { //Learn: start the loop index at 1
+        //console.log("elements", nums[i])
+
+        //the condition - if the index is not the same as the index of the pointer's end, value transfer and increment pointer
+        if (nums[i] !== nums[pointer - 1]) {
+            nums[pointer] = nums[i] //Kit: correct
+            pointer++; //Kit: correct
+        }
+        
+    }
+    //return and exit 
+    return pointer; //return empty arr
+    
+};
