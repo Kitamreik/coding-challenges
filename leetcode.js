@@ -805,3 +805,92 @@ var lengthOfLastWord = function(s) { //input: s, a string
     return char;
     
 };
+//-----
+
+//https://leetcode.com/problems/merge-sorted-array/?envType=study-plan-v2&envId=top-interview-150
+
+/**
+ * @param {number[]} nums1
+ * @param {number} m
+ * @param {number[]} nums2
+ * @param {number} n
+ * @return {void} Do not return anything, modify nums1 in-place instead.
+ */
+var merge = function(nums1, m, nums2, n) {
+    //console.log(nums1 + nums2)
+    
+    //Kit first attempt: for (let i = 0; i < nums1.length; i++)
+    for (let i = m, j = 0; j < n; i++, j++) { //Learn: let the index be the length of the first array, init a second loop counter to zero, let the second loop counter traverse the length of the second array and increment all counters
+
+    //Kit: returning the console logs caught a case
+        console.log(nums1[i], "first arr")
+        console.log(nums2[i], "second arr") //if there is no element, its undefined
+
+        //Learn: transfer the values between the two arrays based off their respective counters
+        console.log(nums1[i] = nums2[j])
+        nums1[i] = nums2[j];
+
+    //Kit: catching a base case 
+    /*
+    if (m === 0) {
+            console.log("no elements in nums1")
+            console.log(nums2[i])
+            nums2[i] = n
+            console.log("val trans", nums2[i])
+            //nums2[i].push() //store the value in the first arr
+            
+        } else if (nums1[i] || nums2[i] === 0) {
+            //pop the element out to not be counted
+            console.log("more logic")
+
+        } else {
+            console.log("error handling")
+        }
+    */ 
+    }
+    //no need to return- you do sorting outside of the loop, end
+    console.log(nums1.sort((a,b) => a - b))
+    nums1.sort((a,b) => a - b); 
+};
+
+//-----
+//https://leetcode.com/problems/remove-element/?envType=study-plan-v2&envId=top-interview-150
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function(nums, val) {
+    let k = 0; //init k as 0 to detect (Learn): position of next valid element
+    for (let i = 0; i < nums.length; i++) { //Kit: correct syntax
+
+    //Learn: if the curr is not equal to the target
+    if (nums[i] !== val) {
+        //Learn: use k to move the value there and increment the pointer
+        nums[k] = nums[i];
+        k++;
+    }
+
+    //Kit: code does work for one test case
+    /*
+      if (nums[i] == val) {
+            console.log("val match")
+            nums.sort((a,b) => a - b)
+            //remove the value...
+            console.log(nums.pop(val))
+            //the expected answer with the correct length
+            expectedNums = nums
+            k = expectedNums.length
+            console.log(expectedNums.sort((nums, k) => nums - k), "sorting again")
+
+            //2nd loop init
+            for (j = 0; j < k; j++) {
+                let res = nums[i] == expectedNums[i];
+                console.log("value trans", res)
+            }
+        }
+    */
+    }
+    //return and exit loop - return the k pointer where it is the length of the modded array
+    return k;
+    };
