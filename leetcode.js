@@ -918,3 +918,26 @@ var removeDuplicates = function(nums) {
     return pointer; //return empty arr
     
 };
+//-----
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    let pointer = 2; //Learn: init the pointer to two so it can find a unique element in the array at most twice 
+
+    for (let i = 2; i < nums.length; i++) { //Learn: start the loop index at 2, to match the pointer
+        //console.log("elements", nums[i])
+
+        //the condition - if the index is not the same as the index of the pointer's end, value transfer and increment pointer
+        console.log("elements", nums[i])
+        if (nums[i] !== nums[pointer-2]) { //adjust for 2
+            nums[pointer] = nums[i] //Kit: correct
+            console.log("pointer elements", nums[pointer])
+            pointer++; //Kit: correct
+        }
+        
+    }
+    //return and exit 
+    return pointer; //return arr
+};
