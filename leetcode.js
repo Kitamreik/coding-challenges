@@ -941,3 +941,44 @@ var removeDuplicates = function(nums) {
     //return and exit 
     return pointer; //return arr
 };
+//-----
+//https://leetcode.com/problems/longest-common-prefix/submissions/1449930390/?envType=study-plan-v2&envId=top-interview-150
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+    //Plan: create a pointer(s) - know where we are in the big array and within each individual word
+
+    let index = strs[0]
+    let word = index.length
+    console.log("index of the word in the big array", index)
+    console.log("index of the letter of each word", word)
+
+    //logic - repeated work - for loop - whenever you involve 2 loops to do work - brute force strategy 
+    for (let i = 1; i < strs.length; i++ ) {
+        //look at each letter inside of the word
+        let s = strs[i]
+        console.log("each letter", s)
+
+        //comparisons between values - another loop needed - while
+        while (index !== s.substring(0, word) ) { //while I look at my index (know where we are in the big array) AND it is NOT(!) the same as looking at the substring of every letter starting at 0 and walking up through the word length
+
+        word--;//the count of word goes down
+        console.log(word)
+        //base case - a way to catch cases early
+        if (word === 0) {
+            console.log("no common prefix")
+            return "";
+        }
+        //value transfer: index is the target so we can compare letters between words in the array
+        console.log("index before VT", index)
+        index = index.substring(0, word)
+        console.log("index after VT", index)
+        }
+
+    }
+    console.log("final index", index)
+    //exit and return
+    return index;
+};
