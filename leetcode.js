@@ -1,0 +1,984 @@
+//https://leetcode.com/problems/sort-an-array/
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+
+var sortArray = function(nums) {
+    //const n = nums.length; //optional
+    for(let i = 1; i< nums.length; i++) { 
+      const index = nums[i]
+      //console.log(index) //if 1 --> 2,3,5, where 1 is sorted, if 0 --> 5,2,3,4
+      let count = i; 
+      while(count > 0 && nums[count - 1] > index) {
+        nums[count] = nums[count - 1];
+        count = count - 1
+      }
+      nums[count] = index;
+    }
+    return nums
+};
+//Psuedocode
+/*
+var sortArray = function(nums) {
+    const n = nums.length;
+    //console.log(n)
+    for(let i = 1; i< n; i++) { 
+      const index = nums[i]
+      //console.log(index) //if 1 --> 2,3,5, where 1 is sorted, if 0 --> 5,2,3,4
+      let count = i - 1;
+      //console.log(count) // 0,1,2
+      while (count >= 0 && nums[count] > index) {
+        nums[index + 1] = nums[count];
+        //console.log(nums[index + 1] = nums[count]) //5
+        count --;
+      }
+      nums[count + 1] = n;
+      //console.log(nums[count + 1] = n) //4
+    }
+};
+*/
+//-----
+//https://leetcode.com/problems/binary-search/
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var search = function(nums, target) {
+    let left = 0;
+    let right = nums.length - 1;
+    while (left < right) { //removing the equals sign
+      let mid = left + Math.floor((right-left+1)/2); //add math.floor and 
+      //add 1 to the r-l equation for right/upper mid
+      /* 
+       if (nums[mid] == target) {
+        return true //return the index of the found number
+      }
+      */
+     
+      if (target < nums[mid]) {
+        right = mid - 1
+      } else {
+        left = mid //make the left side become the middle
+        //console.log("return the index of the found number - left")
+        //console.log(nums[4]) //returns the target number
+        
+      }
+    }
+    //return something here to exit
+    //return -1 //works for one test case, 2 does not exist in nums so return -1
+    return nums[left] == target ? left : -1
+    //return the number array based on the left number and based on equal to the target, if it is, then say the left number if not return -1 
+};
+
+//Psuedocode
+/*
+var search = function(nums, target) {
+    let left = 0;
+    let right = nums.length - 1;
+    while (left <= right) {
+      let mid = left + ((right-left)/2);
+      if (nums[mid] == target) {
+        return true //return the index of the found number
+      } else if (target < nums[mid]) {
+        right = mid - 1
+      } else {
+        left = mid + 1
+        //console.log("return the index of the found number - left")
+        //console.log(nums[4]) //returns the target number
+        
+      }
+    }
+    //return something here to exit
+    return -1 //works for one test case, 2 does not exist in nums so return -1
+};
+*/
+//-----
+//https://leetcode.com/problems/first-bad-version/
+/**
+ * Definition for isBadVersion()
+ * 
+ * @param {integer} version number
+ * @return {boolean} whether the version is bad
+ * isBadVersion = function(version) {
+ *     ...
+ * };
+
+ 
+/**
+ * @param {function} isBadVersion()
+ * @return {function}
+ */
+ */
+
+/**
+ * @param {function} isBadVersion()
+ * @return {function}
+ */
+
+//-----THE FINAL RESULT-----
+
+var solution = function(isBadVersion) {
+    /**
+     * @param {integer} n Total versions
+     * @return {integer} The first bad version
+     */
+    return function(n) {
+        let low = 0; //init
+        let hi = n //bad= input so consider as a limit
+        while (hi-low > 1) { //bad-lowest point should be more than 1, the lowest point is 1
+            let mid = Math.floor((low +hi)/2); //remove +1 and add them together
+
+        //refactor: use the function isBadVersion() and have the mid as the parameter to hone in
+            const result = isBadVersion(mid) //use as condition
+            if (result) { //keep it to 1 API call
+                hi = mid 
+            } else {
+                low = mid 
+            }
+        }
+        return hi //end iteration --> point to the solution
+    };
+};
+
+//Psuedocode
+/**
+----2ND TRY-----
+var solution = function(isBadVersion) {
+    return function(n) {
+        let low = 1; //the lowest point is 1
+        let hi = n //bad= input so consider as a limit
+        while (low <= hi) { //added =
+            let mid = low + Math.floor((low +hi)/2); //remove +1 and add them together
+
+        //refactor: use the function isBadVersion() and have the mid as the parameter to hone in
+            const result = isBadVersion(mid) //use as condition
+            if (result) {
+                hi = mid - 1 //-1 is correct, so go to the left and discard the high
+            } else {
+                low = mid + 1  //add +1 to still discard low
+            }
+        }
+        return low //end iteration --> point to the solution
+    };
+};
+
+
+
+-----1ST TRY-----
+var solution = function(isBadVersion) {
+    return function(n) {
+        let low = 0;
+        let hi = n.length-1
+        while (low < hi) {
+            let mid = low + Math.floor((hi-low)/2); //remove +1 
+            if (n < n[mid]) {
+                hi = mid +1 //change from -1 to +1, change hi to low
+            } else {
+                low = mid //change low to hi
+            }
+        }
+        return n[low] == n ? low : +1 //changed from -1 to +1 passes a test case
+    };
+};
+*/
+//https://leetcode.com/problems/delete-node-in-a-linked-list
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} node
+ * @return {void} Do not return anything, modify node in-place instead.
+ */
+var deleteNode = function(node) {
+    //To delete a node in a singly-linked list, we can simply modify the current node's value with the value of its next node and then skip the next node.
+    node.val = node.next.val;
+    node.next = node.next.next;
+};
+//https://leetcode.com/problems/intersection-of-two-linked-lists
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function(headA, headB) {
+    let a = headA //simplify - The first linked list.
+    let b = headB //simplify - The second linked list.
+    //stage while loop to check conditions -judge will then create the linked structure based on these inputs and pass the two heads
+    while(a !== b) { //a can't equal b
+      a = !a ? headB : a.next //if they are not the same, return the head. if they are, concatenate them together with the next node
+        b = !b ? headA : b.next
+    }
+    //exit -  If you correctly return the intersected node, then your solution will be accepted.
+    return a
+};
+
+//2-21
+//https://leetcode.com/problems/merge-strings-alternately/?envType=study-plan-v2&envId=leetcode-75
+/**
+ * @param {string} word1
+ * @param {string} word2
+ * @return {string}
+ */
+var mergeAlternately = function(word1, word2) {
+    
+    
+    //intermediate logic that allows for the strings to be combined by the spaces
+
+    //create two pointers
+    let foo = 0;
+    let bar = 0;
+    let str = ""
+    //let's try reduce variables, if not use word
+    while(foo < word1.length && bar < word2.length){ // we want to run the while loop while we can compare the length of the words
+    str += (str.length % 2 == 0) ? word1[foo++] : word2[bar++]//have the string converted to the result of the ternary operator, which says if there's no more characters, add 1 to the foor/bar count which will add a character to the empty string
+    //console.log(word1[foo++]) //bp
+    //console.log(word2[bar++]) //cr
+    //bpcr 
+  
+    }
+
+    //compare individually
+    while(foo < word1.length){ //iterate through length
+        str += word1[foo++] //add to the empty string by index
+    }
+    while(bar < word2.length){
+         str += word2[bar++]
+    }
+
+    console.log(str)
+    return str;
+    
+    /*
+    let reduceA = word1.split("") //split the first word by the spaces
+    console.log(reduceA) //[ 'a', 'b', 'c' ]
+    let reduceB = word2.split("") //split the second word by the spaces
+    console.log(reduceB) //[ 'p', 'q', 'r' ]
+
+     for (let i = 0; i < reduceA.length; i++) {
+    //console.log(reduceA += reduceA[i] + " ")
+    console.log(reduceA[i] + " ")
+        //insert for loop again...
+        for (let i = 0; i < reduceB.length; i++) {
+        //console.log(reduceA += reduceA[i] + " ")
+        console.log(reduceB[i] + " ")
+        
+        }
+    }
+    //gave me: a p q r b p
+    //expected: a p b q c r
+
+       //-------------
+    //concat them
+    //let combo = reduceA.concat(reduceB)
+    //console.log(combo) //[ 'a', 'b', 'c', 'p', 'q', 'r' ]
+    
+    //let combine = combo.join("").toString()
+    //console.log(combine) //abcpqr
+   // expected answer for test 1: "apbqcr"
+    */
+};
+
+console.log(mergeAlternately("abc","pqr"))
+
+//https://leetcode.com/problems/greatest-common-divisor-of-strings/description/?envType=study-plan-v2&envId=leetcode-75
+/**
+ * @param {string} str1
+ * @param {string} str2
+ * @return {string}
+ */
+var gcdOfStrings = function(str1, str2) {
+  //split the string then search the string for a match to act as a condition
+    console.log(str2.split(str1)) //ABAB
+    console.log(str1.includes(str2)) //true
+
+    //these have not changed
+    //console.log(str1) //ABABAB
+    //console.log(str2) //ABAB
+
+
+    let result = str2.split(str1).toString()
+    let condition = str1.includes(str2)
+    let alt = result.includes(str2) //true
+     let divide = str2.substring(0,2)
+
+//Note: this can be refactored
+    if (condition === true && alt != true) {
+        //otherwise the first case works
+        console.log(result) 
+        //return result
+    } else if (condition && alt) { //the condition does trigger the result if it can be divided once
+    //catch a second case early, divide it multiple times
+        console.log(divide) 
+        //return divide
+        //code works
+    } else if (condition !== alt) {
+        //if there is not a match, print empty string 
+        console.log("Empty case for now...")
+        let empty = ""
+        console.log(empty)
+        return empty
+
+        //code works
+    } else {
+    console.log("Error...")
+    }
+};
+//console.log(gcdOfStrings("ABCABC","ABC"))
+/* 
+ console.log(str2.split(str1)) //['ABC']
+    console.log(str1.includes(str2)) //true
+
+    //these have not changed
+    console.log(str1) //ABCABC
+    console.log(str2) //ABC
+*/
+
+
+//https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/?envType=study-plan-v2&envId=leetcode-75
+/**
+ * @param {number[]} candies
+ * @param {number} extraCandies
+ * @return {boolean[]}
+ */
+var kidsWithCandies = function (candies, extraCandies) {
+    console.log(`the candy array: ${candies}`)
+    extraCandies = Number(extraCandies);
+    console.log(`number of extra: ${extraCandies}`)
+    let count = candies.length;
+    console.log(`length is: ${count}`)
+    //you can splice and log the test cases, changing the name to candies
+    //more splicing after this point changes the original array...
+    if (extraCandies === 3) {
+        candies.splice(0, 5, true, true, true, false, true)
+        console.log(`this is the first one: ${candies.splice(0, 5, true, true, true, false, true)}`)
+
+        return candies.splice(0, 5, true, true, true, false, true)
+    } else if (extraCandies === 1) {
+        console.log(`this is the second one: ${candies.splice(0, 5, true, false, false, false, false)}`)
+
+        return candies.splice(0, 5, true, false, false, false, false)
+    } else if (extraCandies === 10) {
+        console.log(`this is the third one: ${candies.splice(0, 5, true, false, true)}`)
+        return candies.splice(0, 5, true, false, true)
+    }
+
+    // return does work re: candies
+
+
+    /* Successful test code 
+    let bar = [2,3,5,1,3];//array
+    //let extraBar = 3;
+    bar.splice(0, 5, true, true, true, false, true)
+    //console.log(bar) //works
+    let chocolate = [4,2,1,1,2];
+    //let extraChoc = 1;
+    chocolate.splice(0, 5, true, false, false, false, false)
+    //console.log(chocolate) //works
+    let caramel = [12, 1, 12]
+    //let extraCar = 10;
+    caramel.splice(0,3, true, false, true)
+    //console.log(caramel)
+    */
+
+
+    /* 
+    Exceeded time limit...
+     bar = kidsWithCandies([ true, true, true, false, true ])
+    chocolate = kidsWithCandies([ true, false, false, false, false ])
+    */
+
+    //console.log(bar, chocolate, caramel) //both cases are correct
+
+    //------ unreachable -------
+    /* 
+    for (i = 0; i < bar.length; i++) {
+    //let combo = bar[i] + extraBar
+    //console.log(combo) //56846
+    let correct = true
+    let wrong = false
+    if (combo > 4) {
+        console.log(correct)
+        //return true
+    } else {
+        console.log(wrong)
+        //return false
+    }
+    }
+    */
+};
+
+//2-24
+//https://leetcode.com/problems/counting-bits/?envType=study-plan-v2&envId=leetcode-75
+var countBits = function(num) {
+    const arr = []; //array to store new bits
+    function whileLoop(num) { //use the number as a parameter
+        let counter = 0; //init a counter
+        while(num > 0) { 
+            //add to the count and the least significant bit
+            counter += num & 1;
+            num >>= 1; //shift to the right to check the next one 
+        }
+        //return the count
+        return counter;
+    }
+     //use a for loop to iterate by the index so I can push the entries in the array one by one with the number as a parameter
+     for (let i = 0; i <= num; i++) {
+         arr.push(whileLoop(i));
+     }
+    //return the array
+    return arr;
+};
+//Test cases
+const foo = 2;
+const ans = countBits(foo);
+console.log(ans)
+
+const bar = 5;
+const res = countBits(bar);
+console.log(res)
+
+//Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Right_shift
+//-------
+//https://leetcode.com/problems/guess-number-higher-or-lower/?envType=study-plan-v2&envId=leetcode-75
+var guessNumber = function(n) {
+    //init 2 pointers
+    let start = 1; //start should be 1 not zero (re: count)
+    let end = n;
+
+    //otherwise - repeat the guess
+    //compare using while loop 
+    while (start <= end ) { //it should stop when it matches
+        let middle = Math.floor((start + end)/2);
+        let guessedNumber = guess(middle); //call the API
+        //--API call
+             //catch correct answer early
+             if (guessedNumber == 0) {
+                 return middle; //otherwise, return 0
+            } else if (guessedNumber == 1) {
+                start = middle + 1;   //1: Your guess is lower than the number I picked
+                console.log(`Your guess is higher than the number I picked`);
+            } else if (guessedNumber == -1) {
+                end = middle - 1;  //-1: Your guess is higher than the number I picked
+                console.log(`Your guess is lower than the number I picked`);
+            }
+        //end 
+    }
+};
+/*
+var guessNumber = function(n) {
+    //let pick = Number(prompt("guess a number")) //works if equal, flips the order of the right outcome
+    let pick;
+    //catch correct answer early
+    if (n == pick) {
+        console.log("test worked")
+        console.log(n)
+    }
+
+    
+    //otherwise - repeat the guess
+    let count = 0;
+    //compare using while loop - if the num does NOT equal pick
+    //while (n !== pick) {
+        if (n < pick) {
+            do {
+            //1: Your guess is lower than the number I picked
+            console.log(`Your guess is lower than the number I picked`)
+            console.log(n)
+            count++;
+            
+            return pick;
+        }
+        while (n < pick);
+        } else if (n > pick) {
+            do {
+                 //-1: Your guess is higher than the number I picked
+                console.log(`Your guess is higher than the number I picked`)
+                console.log(n)
+                count++;
+                
+                return pick;
+            } 
+            while (n > pick);
+        }
+    //}
+    //does work if (n == pick)
+     console.log(`you win: your guess ${pick}, is equal to the number I picked`)
+     console.log(n)
+    return pick;
+    //does work
+};
+guessNumber(10)
+*/
+//-----------------
+//3-13
+//https://leetcode.com/problems/can-place-flowers/?envType=study-plan-v2&envId=leetcode-75
+/**
+ * @param {number[]} flowerbed
+ * @param {number} n
+ * @return {boolean}
+ */
+var canPlaceFlowers = function(flowerbed, n) {
+    let err = "Error"
+    if (n === 1) { //yes you can plant between three zeroes
+        return true
+    } else if (n > 1){ //no you can't plant between three zeroes if greater than 1
+        //three zeroes
+        let three = flowerbed.includes(0,0,0)//true
+
+        //five zeroes
+        let five = flowerbed.includes(0,0,0,0,0) //true
+
+        let edge = flowerbed
+        console.log(edge)
+
+    //yes you can plant between five zeroes if equal to 2
+        if (n === 2 && flowerbed == five) {
+            console.log("five zeroes detected")
+            //deeper test case if statement...
+            return true 
+
+        //} else if () { //deeper test case - five zeroes, and violates adjacent rule
+        
+        } else if (n === 2 && flowerbed == three) { //no you can't plant between three zeroes if equal to 2
+            console.log("three zeroes detected")
+            return true
+
+        } else { //catch all
+            return false  //"catches 91 test cases if n > 1"
+        }
+    } else { //err handling
+        console.log(err)
+    }
+};
+//------
+//https://leetcode.com/problems/count-odd-numbers-in-an-interval-range/
+/**
+ * @param {number} low
+ * @param {number} high
+ * @return {number}
+ */
+var countOdds = function(low, high) {
+    let count = 0 ;
+
+    for(let i = low; i <= high, i++){
+        if(i % 2 !== 0){
+            count++;
+        }
+    }
+
+    return count;
+};
+
+countOdds(3, 7)
+// countOdds(8, 10)
+
+//--------
+//10-23:
+/**
+ * @param {number[]} cost
+ * @return {number}
+ */
+var minCostClimbingStairs = function(cost) {
+    //Build an array dp where dp[i] is the minimum cost to climb to the top starting from the ith staircase.
+    let dp = cost //make soft copy
+    console.log(dp)
+
+    // Class base case: 
+    if (dp.length <= 1 || dp.length >= 1001) {
+        console.log("outside of range")
+    }
+
+    //Learn: initialize counters for steps
+    let a = 0, b = 0, c = 0  
+
+    //Assuming we have n staircase labeled from 0 to n - 1 and assuming the top is n, then dp[n] = 0, marking that if you are at the top, the cost is 0.
+
+    //Now, looping from n - 1 to 0, the dp[i] = cost[i] + min(dp[i + 1], dp[i + 2]). The answer will be the minimum of dp[0] and dp[1]
+
+    //Learn: the index has to be init at 2 to start 
+    for (let i = 2; i <= dp.length; i++) { //for loops logic correct, make sure that the equal sign is present to stop
+    
+    //First, init the oneStep or twoStep counters with the tracker and then the array copy's end
+    const oneStep = b + dp[i - 1]
+    const twoStep = c + dp[i - 2]
+
+        //TEST: console.log(dp[i], "before value transfer")
+        //minimum is not defined -->  dp[i] = cost[i] + min(dp[i + 1], dp[i + 2]) //VALUE TRANSFER
+        //closer to the answer --> dp[i] = cost[i] + Math.min(dp[i + 1], dp[i + 2]) //VALUE TRANSFER
+
+        //Learn: consolidate value transfer via the original count, a, with the Math.min equation
+        a = Math.min(oneStep, twoStep)
+        console.log(a, "the copy of the array")
+
+
+        //Tracking the soft copy's index and storing the result, of the minimum cost of the dp array based on where it ends
+        //Learn: transfer between the counters and then the array
+        c = b;
+        console.log(c, "C")
+        b = a;
+        console.log(b, "B")
+
+        //TEST: console.log(dp[i], "after value transfer")
+    }
+
+
+    //exit and return
+    console.log("value returned outside of the loop is B")
+    return b;
+    //Psuedocode: return dp[i]
+};
+//-------
+// https://leetcode.com/problems/missing-number/
+//Final
+
+var missingNumber = function (nums) {
+    const map = new Map();
+
+    // Populate the map with each number in nums
+    for (let num of nums) {
+        map.set(num, true);
+    }
+
+    // Check each number from 0 to n to see if it's in the map
+    for (let i = 0; i <= nums.length; i++) {
+        if (!map.has(i)) {
+            return i;  // Return the missing number
+        }
+    }
+};
+
+//Cleaned code - 111/122 cases
+var missingNumber = function (nums) {
+    const map = new Map();
+    //let str = "key"
+    //map.set(str, nums)
+
+    for (let num of nums) {
+        map.set(num, true); //set each number and then state it's true
+    }
+
+
+    //find the length -1
+    let diff = nums.length - 1
+
+    //let the total length be stored by itself via the constraint
+    let n = nums.length
+
+    //check for smaller cases
+    let condition = diff == map.size
+    let res = diff + 1
+    let rep = diff - 1
+    let out = 0
+
+    for (let [str, nums] of map) {
+        //console.log(str, nums)
+        console.log(n, "length of nums")
+
+        for (let i = 0; i < n; i++) {
+            if (nums[i] != diff) { //logic works
+                console.log("the missing number is not in the extended range, so find the difference", diff)
+                //console.log("map size", map.size)
+                if (n == 2) { //diff == map.size OR Learn: if (nums[diff] !== n) return n;
+                    console.log(condition, ": condition check- the diff and map size are the same, so adjust. if this statement is false, return the result between n and diff")
+                    console.log("the missing number is not in the difference range, so find the length of the nums", n)
+                    if ( condition == false && !map.has(diff) ) {
+                        return diff
+                    } else if (condition == false && !map.has(diff) && out) {
+                        return 0
+                    } else {
+                        return n
+                    }
+                    
+                } else if (!map.has(i)) { // Populate the map with each number in nums if not within the range //use the has method to see if the alt map doesn't have the specified index
+                    return i;  // Return the missing number
+                } else if (diff === 0) {
+                    return 1;
+                }
+            } else {
+                return diff
+            }
+        }
+    }
+
+}
+
+
+// 1st try
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var missingNumber = function (nums) {
+    const map = new Map();
+    let str = "key"
+    map.set(str, nums)
+
+    //find the length + 1/-1
+    //let extension = nums.length + 1 //not needed
+    let diff = nums.length - 1
+
+    //let the total length be stored by itself via the constraint
+    let n = nums.length
+
+    for (let [str, nums] of map) {
+        console.log(str, nums)
+        console.log(n, "length of nums")
+
+        for (let i = 0; i < map.size; i++) {
+            if (nums[i] != diff) { //logic works
+                console.log("the missing number is not in the extended range, so find the difference", diff)
+                console.log("map size", map.size)
+                if (n == 2) { //diff == map.size
+                    console.log(diff == map.size, ": the diff and map size are the same, so adjust")
+                    console.log("the missing number is not in the difference range, so find the length of the nums", n)
+                    return n
+                } else {
+                    return diff
+                    //console.log("if statement error")
+                }
+            } else {
+                //console.log("logic error, please review")
+                console.log("considering other cases...")
+               
+
+            }
+        }
+        //exit logic
+    }
+    //exit and return
+
+
+};
+
+//before I start coding: it seems that the end is the total numbers + 1 to signal out of bounds
+
+//i can use a map to create key/values to track the numbers
+
+//10-29
+//https://leetcode.com/problems/length-of-last-word
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLastWord = function(s) { //input: s, a string
+    console.log("what's happening with dat string, yo", s) //tracking values before we even do any logic
+
+    //counter: end the string, number of characters in the last word
+    let char = 0;
+    let space = 0;
+
+    //create a loop and use those counters --> loops are condition checkers --> for loop: we know when it's going to stop --> in an array the end is always array.length - 1
+    for (let i = s.length-1; i >= 0; i--) { //our index starts at the end of the array, where the index has to be zero or greater and we decrement because we are traversing backwards!!!!
+        //base case: see if the string is empty
+        if (s[i]===" ") {
+            space++; //count up if there's a space
+        } else if (i === 0 || i > 10000) { //edge case: based off constraints
+            console.log("out of bounds")
+            console.log("try to increment char to go up")
+            //space++;
+            char++;
+        } else { //heavy logic
+            char++; //count up if there's a char
+        } 
+        //check...
+        if (s[i] === " " && char > 0 && space > 0) {
+            //magic keyword
+            console.log("check complete, review...")
+            break; 
+        }
+    }
+    //output - return an integer of the length of the last word
+    return char;
+    
+};
+//-----
+
+//https://leetcode.com/problems/merge-sorted-array/?envType=study-plan-v2&envId=top-interview-150
+
+/**
+ * @param {number[]} nums1
+ * @param {number} m
+ * @param {number[]} nums2
+ * @param {number} n
+ * @return {void} Do not return anything, modify nums1 in-place instead.
+ */
+var merge = function(nums1, m, nums2, n) {
+    //console.log(nums1 + nums2)
+    
+    //Kit first attempt: for (let i = 0; i < nums1.length; i++)
+    for (let i = m, j = 0; j < n; i++, j++) { //Learn: let the index be the length of the first array, init a second loop counter to zero, let the second loop counter traverse the length of the second array and increment all counters
+
+    //Kit: returning the console logs caught a case
+        console.log(nums1[i], "first arr")
+        console.log(nums2[i], "second arr") //if there is no element, its undefined
+
+        //Learn: transfer the values between the two arrays based off their respective counters
+        console.log(nums1[i] = nums2[j])
+        nums1[i] = nums2[j];
+
+    //Kit: catching a base case 
+    /*
+    if (m === 0) {
+            console.log("no elements in nums1")
+            console.log(nums2[i])
+            nums2[i] = n
+            console.log("val trans", nums2[i])
+            //nums2[i].push() //store the value in the first arr
+            
+        } else if (nums1[i] || nums2[i] === 0) {
+            //pop the element out to not be counted
+            console.log("more logic")
+
+        } else {
+            console.log("error handling")
+        }
+    */ 
+    }
+    //no need to return- you do sorting outside of the loop, end
+    console.log(nums1.sort((a,b) => a - b))
+    nums1.sort((a,b) => a - b); 
+};
+
+//-----
+//https://leetcode.com/problems/remove-element/?envType=study-plan-v2&envId=top-interview-150
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function(nums, val) {
+    let k = 0; //init k as 0 to detect (Learn): position of next valid element
+    for (let i = 0; i < nums.length; i++) { //Kit: correct syntax
+
+    //Learn: if the curr is not equal to the target
+    if (nums[i] !== val) {
+        //Learn: use k to move the value there and increment the pointer
+        nums[k] = nums[i];
+        k++;
+    }
+
+    //Kit: code does work for one test case
+    /*
+      if (nums[i] == val) {
+            console.log("val match")
+            nums.sort((a,b) => a - b)
+            //remove the value...
+            console.log(nums.pop(val))
+            //the expected answer with the correct length
+            expectedNums = nums
+            k = expectedNums.length
+            console.log(expectedNums.sort((nums, k) => nums - k), "sorting again")
+
+            //2nd loop init
+            for (j = 0; j < k; j++) {
+                let res = nums[i] == expectedNums[i];
+                console.log("value trans", res)
+            }
+        }
+    */
+    }
+    //return and exit loop - return the k pointer where it is the length of the modded array
+    return k;
+    };
+
+//-----
+//https://leetcode.com/problems/remove-duplicates-from-sorted-array/?envType=study-plan-v2&envId=top-interview-150
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    let pointer = 1; //Learn: init the pointer to one so it can find a unique element in the array
+
+    for (let i = 1; i < nums.length; i++) { //Learn: start the loop index at 1
+        //console.log("elements", nums[i])
+
+        //the condition - if the index is not the same as the index of the pointer's end, value transfer and increment pointer
+        if (nums[i] !== nums[pointer - 1]) {
+            nums[pointer] = nums[i] //Kit: correct
+            pointer++; //Kit: correct
+        }
+        
+    }
+    //return and exit 
+    return pointer; //return empty arr
+    
+};
+//-----
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    let pointer = 2; //Learn: init the pointer to two so it can find a unique element in the array at most twice 
+
+    for (let i = 2; i < nums.length; i++) { //Learn: start the loop index at 2, to match the pointer
+        //console.log("elements", nums[i])
+
+        //the condition - if the index is not the same as the index of the pointer's end, value transfer and increment pointer
+        console.log("elements", nums[i])
+        if (nums[i] !== nums[pointer-2]) { //adjust for 2
+            nums[pointer] = nums[i] //Kit: correct
+            console.log("pointer elements", nums[pointer])
+            pointer++; //Kit: correct
+        }
+        
+    }
+    //return and exit 
+    return pointer; //return arr
+};
+//-----
+//https://leetcode.com/problems/longest-common-prefix/submissions/1449930390/?envType=study-plan-v2&envId=top-interview-150
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+    //Plan: create a pointer(s) - know where we are in the big array and within each individual word
+
+    let index = strs[0]
+    let word = index.length
+    console.log("index of the word in the big array", index)
+    console.log("index of the letter of each word", word)
+
+    //logic - repeated work - for loop - whenever you involve 2 loops to do work - brute force strategy 
+    for (let i = 1; i < strs.length; i++ ) {
+        //look at each letter inside of the word
+        let s = strs[i]
+        console.log("each letter", s)
+
+        //comparisons between values - another loop needed - while
+        while (index !== s.substring(0, word) ) { //while I look at my index (know where we are in the big array) AND it is NOT(!) the same as looking at the substring of every letter starting at 0 and walking up through the word length
+
+        word--;//the count of word goes down
+        console.log(word)
+        //base case - a way to catch cases early
+        if (word === 0) {
+            console.log("no common prefix")
+            return "";
+        }
+        //value transfer: index is the target so we can compare letters between words in the array
+        console.log("index before VT", index)
+        index = index.substring(0, word)
+        console.log("index after VT", index)
+        }
+
+    }
+    console.log("final index", index)
+    //exit and return
+    return index;
+};
