@@ -126,6 +126,75 @@ var maxProfit = function(prices) {
 };
 
 //Timed attempt -------------
+//Problem 2: https://leetcode.com/problems/majority-element/?envType=study-plan-v2&envId=top-interview-150
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+    let count = 0 //init count to track numbers
+    let sorted = nums.sort() //sort the array to make it easier
+    console.log(sorted)
+
+    let majority = nums.length/2 //The majority element is the element that appears more than ⌊n / 2⌋ times.
+    console.log(majority, "m")
+
+    for (let i = 0; i < nums.length; i++) {
+        console.log(nums[i], "Index count")
+        if (nums[i] > majority) {
+            count++;
+            console.log(count, "count logger") //code works for a test case
+        } else if (nums[i] < majority) {
+            //Psuedocode: find the biggest element in the sorted array?
+            let bar = Math.max(nums[i])
+            console.log(bar, "max") 
+            // return bar
+        } else {
+            console.log("more logic needed")
+        }
+    }
+    //return and exit
+    return count
+    
+    
+};
+
+//did pass one case at nine minute mark
+
+//Final Code --------
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+    let count = 0 //init count to track numbers
+    //Learn: use a hash map to store values
+    const hash = {};
+
+    let majority = 0 //The majority element is the element that appears more than ⌊n / 2⌋ times. 
+    //Learn: initialize as a second counter to 0.
+
+    //Learn: use a for of loop to init an index n to the nums arr
+
+    for (let n of nums) {
+        //value transfer: store the result of the current hash index or 0 and add 1 to it
+        hash[n] = 1 + (hash[n] || 0);
+        console.log(hash[n], "index of hash")
+
+        //Learn:if the hash's index is greater than the majority
+        if (hash[n] > majority) {
+            count = n; //Learn:update the count based on how many elements inside
+            console.log(count, "count")
+            majority = hash[n]; //Learn: update the majority based on the hash index
+            console.log(majority, "m")
+        }
+    }
+    //return and exit, correct
+    return count
+
+};
+
+//Timed attempt -------------
 //Problem :
 
 //Code Review after TA -------
