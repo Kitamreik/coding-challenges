@@ -195,7 +195,52 @@ var majorityElement = function(nums) {
 };
 
 //Timed attempt -------------
-//Problem :
+//Problem 3: https://leetcode.com/problems/roman-to-integer/?envType=study-plan-v2&envId=top-interview-150
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+    //Plan: find values and make a key b/c s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M'). Took 5 min
+    
+    const one = "I"
+    const four = "IV"
+    const five = "V"
+    const nine = "IX"
+    const ten = "X"
+    const forty = "XL"
+    const fifty = "L"
+    const ninety = "XC"
+    const hunnit = "C"
+    const fiveHunnit = "CD"
+    const nineHunnit = "CM"
+    const thousand =  "M"
+
+    //split the string and check values
+    let chunk = s.trim().split("")
+    console.log(chunk)
+
+    let counter = 0; //Plan: convert the string to an integer
+
+    //Use a loop to compare values
+    for (let bit of chunk) {
+        console.log(bit)
+        console.log(one, "1")
+        if (bit === one) {
+            counter++;
+            console.log(counter, "count")
+        } else {
+            console.log("err")
+        } 
+    }
+
+    
+
+    //return the integer
+    return counter
+};
+
+//passed one test case at the 15 minute mark
 
 //Code Review after TA -------
 
