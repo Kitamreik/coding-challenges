@@ -243,5 +243,115 @@ var romanToInt = function(s) {
 //passed one test case at the 15 minute mark
 
 //Code Review after TA -------
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+    //Plan: find values and make a key b/c s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M'). Took 5 min
+    
+    const one = "I"
+    const four = "IV" //E
+    const five = "V"
+    const nine = "IX" //E
+    const ten = "X"
+    const forty = "XL" //E
+    const fifty = "L"
+    const ninety = "XC" //E
+    const hunnit = "C"
+    const fiveHunnit = "CD" //E
+    const nineHunnit = "CM" //E
+    const thousand =  "M" //E
+
+    //split the string and check values
+    let chunk = s.trim().split("")
+    console.log(chunk)
+
+    //Code Review: for edge cases, combine and then compare to defined values
+    let compare = chunk.join("")
+
+    let counter = 0; //Plan: convert the string to an integer
+    let add; //VT- store and add values
+
+    //Plan: Use a loop to compare values
+    for (let bit of chunk) {
+        console.log(bit, "the bite")
+        console.log(compare, "joined")
+ 
+        if (compare === four) { 
+            add = compare
+            //return 4
+            continue;
+        } else if (compare === nine) { 
+            add = compare
+            continue;
+        } else if (compare === forty) { 
+            add = compare
+            continue;
+        } else if (bit === one ) { //Code Review: will catch all ones up to 3
+            while (counter <= 2 ) {
+                counter++;
+                console.log(counter, "count")
+                }
+                return counter
+        } else {
+            console.log("...")
+        } 
+    }
+};
+
+
+
+//Final Code --------
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+    //Plan: find values and make a key b/c s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M'). Took 5 min.
+    /*
+    const one = "I"
+    const four = "IV" //E
+    const five = "V"
+    const nine = "IX" //E
+    const ten = "X"
+    const forty = "XL" //E
+    const fifty = "L"
+    const ninety = "XC" //E
+    const hunnit = "C"
+    const fiveHunnit = "CD" //E
+    const nineHunnit = "CM" //E
+    const thousand =  "M" //E
+    */
+    //Code Review: a smart approach to the problem, make an object with key-value pairs that have the string and the numerical value
+    
+    let result = 0; //init a counter
+    const roman = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    };
+
+    //Learn: use a for loop to iterate through the array, stopping at the last element
+    for (let i = 0; i < s.length - 1; i++) {
+        //Learn: if the object's string index is less than the object's string index including the next character
+        if (roman[s[i]] < roman[s[i + 1]]) {
+            result -= roman[s[i]]; //Value transfer and adjust the result based off the index
+        } else {
+            result += roman[s[i]];
+        }
+    }
+    //return and exit
+    return result + roman[s[s.length - 1]];  //the result and where the end of the object's indices are
+};
+
+//Timed attempt -------------
+//Problem :
+
+//Code Review after TA -------
 
 //Final Code --------
