@@ -398,6 +398,22 @@ var hasPathSum = function(root, targetSum) {
  };
 
 //Code Review after TA -------
+//Psuedocode for Visualization:
+    let array = [5,4,8,11,null,13,4,7,2,null,null,null,1]
+    for (let i = 0; i < array.length; i++) {
+        console.log(array[i], "root")
+        console.log(array[i+1], "root + 1")
+        let base = array[i] + array[i+1]
+        let inter = array[i] + array[i+1] + array[i+2]
+        if (base < targetSum) {
+            //console.log("the first and next element aren't the target")
+            console.log(base, "base")
+            if (inter < targetSum) {
+                console.log(inter, "inter")
+            }
+            //return false
+        }
+    }
 
 //Final Code --------
 
