@@ -350,6 +350,59 @@ var romanToInt = function(s) {
 };
 
 //Timed attempt -------------
+//Problem 4: https://leetcode.com/problems/path-sum/
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} targetSum
+ * @return {boolean}
+ */
+ //without using LL logic
+var hasPathSum = function(root, targetSum) {
+    //if there is no root, or the target is zero, stop
+    let empty = []
+    if (root == empty || targetSum === 0) {
+        console.log("exit due empty or no path")
+        return false
+    } else if (root !== empty && targetSum === targetSum) {
+        console.log("alt logic")
+        return true
+    } else {
+        console.log("exit from logic")
+        return false
+    }
+
+//Psuedocode for Visualization:
+    let array = [5,4,8,11,null,13,4,7,2,null,null,null,1]
+    for (let i = 0; i < array.length; i++) {
+        console.log(array[i], "root")
+        if (array[i] + array[i+1] < targetSum) {
+            console.log("the first and next element aren't the target")
+            return false
+        }
+    }
+    //think about smaller cases if the sum isn't met
+
+    //return and exit - is a good failsafe
+    console.log("exit from logic")
+    
+    return false
+
+ };
+
+//Code Review after TA -------
+
+//Final Code --------
+
+
+//Timed attempt -------------
 //Problem :
 
 //Code Review after TA -------
