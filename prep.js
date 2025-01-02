@@ -458,7 +458,45 @@ var hasPathSum = function (root, targetSum) {
 };
 
 //Timed attempt -------------
-//Problem :
+//Problem 5: https://leetcode.com/problems/add-two-numbers/
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function(l1, l2) {
+    l1 = [2,4,3]
+    l2 = [5,6,4]
+    //use a for loop to traverse backwards and print out values
+    let one = l1
+    let two = l2
+    let storage = []
+
+    for (i = one.length-1; i < one.length; i--) {
+        //console.log(one[i]) //342
+        storage.push(one[i])
+        console.log(storage)
+
+        if (one[i] == undefined) {break}
+   
+    }
+    for (j = two.length-1; j < two.length; j--) {
+        //console.log(two[j]) //465
+        break;
+    }
+
+    console.log(storage)
+
+
+};
+//ran out of time 
 
 //Code Review after TA -------
 
