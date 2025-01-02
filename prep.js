@@ -416,7 +416,46 @@ var hasPathSum = function(root, targetSum) {
     }
 
 //Final Code --------
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} targetSum
+ * @return {boolean}
+ */
+var hasPathSum = function (root, targetSum) {
+    //When leetcode gives us the def of a binary tree node, we should try to emulate the function it gives us
 
+    //Key: use a depth first search to see how deep you have to go
+    //where val is the root, sum is left and target is right
+    const depthFirstSearch = (root, sum , target) => {
+        //this.root = (root === undefined ? 0 : root)
+        //this.sum = (sum === undefined ? null : sum)
+        //this.target = (target === undefined ? null : target)
+        //console.log(this.root, "root", this.sum, "sum", this.target, "target")
+
+        //if there is no root, hence the array is empty
+        if (!root) {return false}
+
+        //Value transfer between the root's value and the sum and increment
+        sum += root.val
+
+        //if get to the target, stop and return true
+        if (sum == target && !root.left && !root.right) {return true}
+
+        //otherwise, return the last node, the sum and the target
+        return depthFirstSearch(root.right, sum, target) || depthFirstSearch(root.left, sum, target)
+    }
+
+    //return and exit
+    return depthFirstSearch(root, 0, targetSum)    
+};
 
 //Timed attempt -------------
 //Problem :
