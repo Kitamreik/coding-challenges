@@ -982,3 +982,38 @@ var longestCommonPrefix = function(strs) {
     //exit and return
     return index;
 };
+
+//4-6
+//https://leetcode.com/problems/search-insert-position/?envType=study-plan-v2&envId=top-interview-150
+//Passed all initial cases within 15 minutes!
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var searchInsert = function(nums, target) {
+    for (let num of nums) {
+        console.log(num)
+        let res = nums.indexOf(num)
+        if (num === target) {
+            console.log(res, "a match")
+            return res 
+        } else {
+            //push the number into the array in order and sort it
+            let op = nums.push(target)
+            console.log(op, "the copy array")
+
+            function compare(a,b){
+                return a - b
+            }
+            nums.join()
+            nums.sort()
+            nums.sort(compare)
+ 
+            let alt = nums.indexOf(target)
+            console.log(alt, "the new location of the target")
+            return alt
+        }
+    }
+    
+};
